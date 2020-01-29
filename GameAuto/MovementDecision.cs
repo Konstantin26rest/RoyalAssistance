@@ -168,8 +168,10 @@ namespace GameAuto
                 nAdvScore = 50;
             else if(nLandCnt > 5)
                 nAdvScore = 200;
+            else if (nLandCnt > 2)
+                nAdvScore = 1500;
             else
-                nAdvScore = 500;
+                nAdvScore = 2000;
 
             foreach (List<Point> Link in g_LstIdenticals)
             {
@@ -195,6 +197,51 @@ namespace GameAuto
 
                 nTotalSum += nSum;
                 k++;
+            }
+
+            bool bFound = false;
+            for ( int i=0; i<g_LstIdenticals.Count-1; i ++)
+            {
+                for( int j=i+1; j<g_LstIdenticals.Count; j++)
+                {
+                    int nCnt0 = g_LstIdenticals[i].Count; int nCnt1 = g_LstIdenticals[j].Count;
+
+                    if ( g_LstIdenticals[i][0].X == g_LstIdenticals[j][0].X && g_LstIdenticals[i][0].Y == g_LstIdenticals[j][0].Y 
+                        || g_LstIdenticals[i][0].X == g_LstIdenticals[j][nCnt1-1].X && g_LstIdenticals[i][0].Y == g_LstIdenticals[j][nCnt1-1].Y
+                        || g_LstIdenticals[i][nCnt0-1].X == g_LstIdenticals[j][0].X && g_LstIdenticals[i][nCnt0-1].Y == g_LstIdenticals[j][0].Y
+                        || g_LstIdenticals[i][nCnt0-1].X == g_LstIdenticals[j][nCnt1-1].X && g_LstIdenticals[i][nCnt0-1].Y == g_LstIdenticals[j][nCnt1-1].Y)
+                    {
+                        bool bSea = false;
+                        foreach(int k1 in g_LstIdenticalItems[i])
+                        {
+                            if (k1 % 2 == 0 && k1 > 0 && k1 < 11)
+                            {
+                                bSea = true;
+                                break;
+                            }
+                        }
+
+                        if (!bSea)
+                        {
+                            foreach (int k1 in g_LstIdenticalItems[j])
+                            {
+                                if (k1 % 2 == 0 && k1 > 0 && k1 < 11)
+                                {
+                                    bSea = true;
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (!bSea) continue;
+
+                        nTotalSum += 1000;
+                        bFound = true;
+                        break;
+                    }
+                }
+
+                if (bFound) break;
             }
 
             return nTotalSum;
@@ -580,20 +627,17 @@ namespace GameAuto
 
             if (nMaxVal1 >= 5000)
                 EmulateMovement(nMaxI, nMaxJ, nMaxDirection);
-            if (nMaxVal2 >= 5000)
+            else if (nMaxVal2 >= 5000)
                 EmulateMovement(nMaxI2, nMaxJ2, nMaxDirection2);
+            else if (nMaxVal1 >= 2000)
+                EmulateMovement(nMaxI, nMaxJ, nMaxDirection);
+            else if(nMaxVal2 >= 4000)
+                EmulateMovement(nMaxI2, nMaxJ2, nMaxDirection2);
+            else if (nMaxVal1 > 1)
+                EmulateMovement(nMaxI, nMaxJ, nMaxDirection);
             else
-            {
-                if (nMaxVal1 >= 2000)
-                    EmulateMovement(nMaxI, nMaxJ, nMaxDirection);
-                else if(nMaxVal2 >= 4000)
-                    EmulateMovement(nMaxI2, nMaxJ2, nMaxDirection2);
-                else if (nMaxVal1 > 1)
-                    EmulateMovement(nMaxI, nMaxJ, nMaxDirection);
-                else
-                    EmulateMovement(nMaxI2, nMaxJ2, nMaxDirection2);
-            }
-
+                EmulateMovement(nMaxI2, nMaxJ2, nMaxDirection2);
+            
             return 0;
         }
 

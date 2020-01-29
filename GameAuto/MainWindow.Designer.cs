@@ -44,6 +44,7 @@
             this.btnProceed2 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.chkAssistMode = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picBtnStart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBtnExit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picRet2)).BeginInit();
@@ -53,12 +54,12 @@
             // lbconfig
             // 
             this.lbconfig.AutoSize = true;
-            this.lbconfig.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbconfig.Location = new System.Drawing.Point(16, 33);
+            this.lbconfig.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbconfig.Location = new System.Drawing.Point(14, 36);
             this.lbconfig.Name = "lbconfig";
-            this.lbconfig.Size = new System.Drawing.Size(240, 16);
+            this.lbconfig.Size = new System.Drawing.Size(267, 13);
             this.lbconfig.TabIndex = 1;
-            this.lbconfig.Text = "Press \'A\' to on or off the assistant mode";
+            this.lbconfig.Text = "Presione \'A\' para activar o desactivar el modo asistente";
             // 
             // timer_process
             // 
@@ -69,7 +70,7 @@
             // 
             this.lbProcessTime.AutoSize = true;
             this.lbProcessTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbProcessTime.Location = new System.Drawing.Point(32, 146);
+            this.lbProcessTime.Location = new System.Drawing.Point(29, 141);
             this.lbProcessTime.Name = "lbProcessTime";
             this.lbProcessTime.Size = new System.Drawing.Size(51, 20);
             this.lbProcessTime.TabIndex = 3;
@@ -78,7 +79,7 @@
             // lstBox
             // 
             this.lstBox.FormattingEnabled = true;
-            this.lstBox.Location = new System.Drawing.Point(117, 60);
+            this.lstBox.Location = new System.Drawing.Point(114, 52);
             this.lstBox.Name = "lstBox";
             this.lstBox.Size = new System.Drawing.Size(189, 108);
             this.lstBox.TabIndex = 4;
@@ -87,7 +88,7 @@
             // 
             this.picBtnStart.BackColor = System.Drawing.Color.Transparent;
             this.picBtnStart.Image = ((System.Drawing.Image)(resources.GetObject("picBtnStart.Image")));
-            this.picBtnStart.Location = new System.Drawing.Point(12, 60);
+            this.picBtnStart.Location = new System.Drawing.Point(9, 55);
             this.picBtnStart.Name = "picBtnStart";
             this.picBtnStart.Size = new System.Drawing.Size(82, 71);
             this.picBtnStart.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -149,11 +150,11 @@
             // btnProceed1
             // 
             this.btnProceed1.Enabled = false;
-            this.btnProceed1.Location = new System.Drawing.Point(241, 199);
+            this.btnProceed1.Location = new System.Drawing.Point(241, 201);
             this.btnProceed1.Name = "btnProceed1";
             this.btnProceed1.Size = new System.Drawing.Size(62, 29);
             this.btnProceed1.TabIndex = 6;
-            this.btnProceed1.Text = "Proceed";
+            this.btnProceed1.Text = "Continuar";
             this.btnProceed1.UseVisualStyleBackColor = true;
             this.btnProceed1.Click += new System.EventHandler(this.btnProceed1_Click);
             // 
@@ -164,7 +165,8 @@
             this.btnProceed2.Name = "btnProceed2";
             this.btnProceed2.Size = new System.Drawing.Size(62, 29);
             this.btnProceed2.TabIndex = 6;
-            this.btnProceed2.Text = "Proceed";
+            this.btnProceed2.Text = "Continuar";
+            this.btnProceed2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnProceed2.UseVisualStyleBackColor = true;
             this.btnProceed2.Click += new System.EventHandler(this.btnProceed2_Click);
             // 
@@ -174,21 +176,31 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(6, 4);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(112, 16);
+            this.label2.Size = new System.Drawing.Size(180, 16);
             this.label2.TabIndex = 3;
-            this.label2.Text = "Automation Bot";
+            this.label2.Text = "Robot de automatización";
             // 
             // chkAssistMode
             // 
             this.chkAssistMode.AutoSize = true;
             this.chkAssistMode.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkAssistMode.Location = new System.Drawing.Point(187, 174);
+            this.chkAssistMode.Location = new System.Drawing.Point(184, 163);
             this.chkAssistMode.Name = "chkAssistMode";
             this.chkAssistMode.Size = new System.Drawing.Size(119, 20);
             this.chkAssistMode.TabIndex = 7;
-            this.chkAssistMode.Text = "Assistant mode";
+            this.chkAssistMode.Text = "Modo asistente";
             this.chkAssistMode.UseVisualStyleBackColor = true;
             this.chkAssistMode.CheckedChanged += new System.EventHandler(this.btnModeAssist_CheckedChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(14, 186);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(290, 12);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Presione \'Q\' para el paso 1 y presione \'W\' para el paso 2.";
             // 
             // MainWindow
             // 
@@ -208,6 +220,7 @@
             this.Controls.Add(this.lbProcessTime);
             this.Controls.Add(this.picRet2);
             this.Controls.Add(this.picRet1);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.lbconfig);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MainWindow";
@@ -240,6 +253,7 @@
         private System.Windows.Forms.Button btnProceed2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox chkAssistMode;
+        private System.Windows.Forms.Label label1;
     }
 }
 

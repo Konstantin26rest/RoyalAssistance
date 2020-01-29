@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Configuration;
 using System.Diagnostics;
 using System.Drawing;
 using System.Runtime.InteropServices;
@@ -47,6 +45,10 @@ namespace GameAuto
                 int vkCode = Marshal.ReadInt32(lParam);
                 if (vkCode == 65) // pressed 'A'
                     Global.g_MainWindow.ProcessClickOnAssistant();
+                else if (vkCode == 81) // Pressed 'Q'
+                    Global.g_MainWindow.ProceedAction1();
+                else if (vkCode == 87) // Pressed 'W'
+                    Global.g_MainWindow.ProceedAction2();
             }
 
             return CallNextHookEx(_hookID, nCode, wParam, lParam);
@@ -60,7 +62,28 @@ namespace GameAuto
         private static CvBlobDetector _blobDetector;
         private List<int> m_LstCharacter = new List<int>();
         private Image<Gray, Byte> mPrevScoreImage = null;
-        
+
+        private Arrow m_ArrowRed1 = null;
+        private ToTop m_ToTop1 = null;
+        private ToLeft m_ToLeft1 = null;
+        private ToRight m_ToRight1 = null;
+        private ToDown m_ToDown1 = null;
+
+        private BlackArrow m_ArrowBlack1 = null;
+        private ToTop2 m_ToTop2 = null;
+        private ToLeft2 m_ToLeft2 = null;
+        private ToRight2 m_ToRight2 = null;
+        private ToDown2 m_ToDown2 = null;
+        private string[] SZ_DRIECTION = { "Up", "Left", "Right", "Down" };
+        private bool m_bAutoStarted = false;
+
+        private MCvScalar[] cols = { new MCvScalar(0,0,0),
+            new MCvScalar(255,255,255), new MCvScalar(0,125,255),
+            new MCvScalar(125,0,255), new MCvScalar(125,125,0),
+            new MCvScalar(255,0,0), new MCvScalar(0,255,0),
+            new MCvScalar(0,0,255), new MCvScalar(0,255,255),
+            new MCvScalar(255,255,0), new MCvScalar(255,0,255),};
+
         public MainWindow()
         {
             InitializeComponent();
@@ -95,13 +118,6 @@ namespace GameAuto
             _hookID = SetHook(_proc);
         }
         
-        private MCvScalar[] cols = { new MCvScalar(0,0,0),
-            new MCvScalar(255,255,255), new MCvScalar(0,125,255),
-            new MCvScalar(125,0,255), new MCvScalar(125,125,0),
-            new MCvScalar(255,0,0), new MCvScalar(0,255,0),
-            new MCvScalar(0,0,255), new MCvScalar(0,255,255), 
-            new MCvScalar(255,255,0), new MCvScalar(255,0,255),};
-
         private Mat GetScreenCapture()
         {
             Bitmap bitmap = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
@@ -340,16 +356,14 @@ namespace GameAuto
             return bCanProcess;
         }
 
-        private string[] SZ_DRIECTION = { "Up", "Left", "Right", "Down" };
-
         private void GenerateHintImage(Image<Bgr, Byte> imgBgr, int nGameBoardX, int nGameBoardY)
         {
             imgBgr.ROI = new Rectangle(nGameBoardX, nGameBoardY, Global.DEF_MAIN_BOARD_W, Global.DEF_MAIN_BOARD_H);
             Image<Bgr, byte> bgGameboard = imgBgr.Copy();
             Image<Bgr, byte> bgGameboard2 = imgBgr.Copy();
 
-            lbStep1.Text = "Step 1:Score=" + Global.g_moveStep1.nScore + ", Pos=(" + Global.g_moveStep1.nX + ", " + Global.g_moveStep1.nY + "), D=" + SZ_DRIECTION[Global.g_moveStep1.nD];
-            lbStep2.Text = "Step 2:Score=" + Global.g_moveStep2.nScore + ", Pos=(" + Global.g_moveStep2.nX + ", " + Global.g_moveStep2.nY + "), D=" + SZ_DRIECTION[Global.g_moveStep1.nD];
+            lbStep1.Text = "Paso 1:Score=" + Global.g_moveStep1.nScore + ", Pos=(" + Global.g_moveStep1.nX + ", " + Global.g_moveStep1.nY + "), D=" + SZ_DRIECTION[Global.g_moveStep1.nD];
+            lbStep2.Text = "Paso 2:Score=" + Global.g_moveStep2.nScore + ", Pos=(" + Global.g_moveStep2.nX + ", " + Global.g_moveStep2.nY + "), D=" + SZ_DRIECTION[Global.g_moveStep1.nD];
 
             int STEPX = Global.DEF_MAIN_BOARD_W / 8; int STEPY = Global.DEF_MAIN_BOARD_H / 8;
             CvInvoke.Rectangle(bgGameboard, new Rectangle(STEPX*Global.g_moveStep1.nY, STEPY*Global.g_moveStep1.nX, STEPX, STEPY), new MCvScalar(255, 255, 0), 4);
@@ -380,18 +394,6 @@ namespace GameAuto
 
             imgBgr.ROI = Rectangle.Empty;
         }
-
-        private Arrow   m_ArrowRed1 = null;
-        private ToTop   m_ToTop1    = null;
-        private ToLeft  m_ToLeft1   = null;
-        private ToRight m_ToRight1  = null;
-        private ToDown  m_ToDown1   = null;
-
-        private BlackArrow  m_ArrowBlack1   = null;
-        private ToTop2      m_ToTop2        = null;
-        private ToLeft2     m_ToLeft2       = null;
-        private ToRight2    m_ToRight2      = null;
-        private ToDown2     m_ToDown2       = null;
 
         private void PlaceHintArrows(int nLeft, int nTop)
         {
@@ -492,6 +494,13 @@ namespace GameAuto
             if (m_ToRight1  != null) { m_ToRight1.Close(); m_ToRight1 = null; }
             if (m_ToDown1   != null) { m_ToDown1.Close(); m_ToDown1 = null; }
 
+            if (m_ArrowBlack1 != null) { m_ArrowBlack1.Close(); m_ArrowBlack1 = null; }
+
+            if (m_ToTop2 != null) { m_ToTop2.Close(); m_ToTop2 = null; }
+            if (m_ToLeft2 != null) { m_ToLeft2.Close(); m_ToLeft2 = null; }
+            if (m_ToRight2 != null) { m_ToRight2.Close(); m_ToRight2 = null; }
+            if (m_ToDown2 != null) { m_ToDown2.Close(); m_ToDown2 = null; }
+
             int nCntZero = 0;
             for( int i = 0; i < 8; i ++ )
             {
@@ -504,7 +513,7 @@ namespace GameAuto
 
             if (nCntZero >= 8*8/2)
             {
-                picRet1.Image = null; picRet2.Image = null; lbStep1.Text = "Step 1"; lbStep2.Text = "Step 2";
+                picRet1.Image = null; picRet2.Image = null; lbStep1.Text = "Paso 1"; lbStep2.Text = "Paso 2";
             }
         }
 
@@ -559,22 +568,20 @@ namespace GameAuto
 
         private void picBtnExit_Click(object sender, EventArgs e)
         {
-            DialogResult ret = MessageBox.Show("Are you sure to exit?", "Automation Bot", MessageBoxButtons.YesNo);
+            DialogResult ret = MessageBox.Show("¿Estás seguro de salir?", "Pregunta", MessageBoxButtons.YesNo);
             if (ret != DialogResult.Yes)
                 return;
 
             Application.Exit();
         }
 
-        private bool m_bAutoStarted = false;
-
         private void picBtnStart_Click(object sender, EventArgs e)
         {
-            string szQuiz = "Are you sure to start automation?";
+            string szQuiz = "¿Estás seguro de comenzar la automatización?";
             if (m_bAutoStarted)
-                szQuiz = "Are you sure to stop automation?";
+                szQuiz = "¿Estás seguro de detener la automatización?";
 
-            DialogResult ret = MessageBox.Show(szQuiz, "Automation Bot", MessageBoxButtons.YesNo);
+            DialogResult ret = MessageBox.Show(szQuiz, "Pregunta", MessageBoxButtons.YesNo);
             if (ret != DialogResult.Yes)
                 return;
 
@@ -590,6 +597,16 @@ namespace GameAuto
             }
 
             m_bAutoStarted = !m_bAutoStarted;
+        }
+
+        public void ProceedAction1()
+        {
+            btnProceed1_Click(null, null);
+        }
+
+        public void ProceedAction2()
+        {
+            btnProceed2_Click(null, null);
         }
 
         private void btnProceed1_Click(object sender, EventArgs e)
