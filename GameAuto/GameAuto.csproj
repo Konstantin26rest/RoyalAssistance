@@ -1,0 +1,266 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EmguCV.3.1.0.1\build\EmguCV.props" Condition="Exists('..\packages\EmguCV.3.1.0.1\build\EmguCV.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7D8EF81F-FFD9-4986-B59D-D303D26C51F6}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>GameAuto</RootNamespace>
+    <AssemblyName>GameAuto</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\Bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Emgu.CV.UI, Version=3.1.0.2282, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
+      <HintPath>..\packages\EmguCV.3.1.0.1\lib\net30\Emgu.CV.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.UI.GL, Version=3.1.0.2282, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
+      <HintPath>..\packages\EmguCV.3.1.0.1\lib\net30\Emgu.CV.UI.GL.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.World, Version=3.1.0.2282, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
+      <HintPath>..\packages\EmguCV.3.1.0.1\lib\net30\Emgu.CV.World.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK, Version=1.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenTK.1.1.2225.0\lib\net20\OpenTK.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK.GLControl, Version=1.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenTK.GLControl.1.1.2225.0\lib\net20\OpenTK.GLControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="ZedGraph, Version=5.1.5.28844, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZedGraph.5.1.5\lib\ZedGraph.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ToDown2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToDown2.Designer.cs">
+      <DependentUpon>ToDown2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToDown.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToDown.Designer.cs">
+      <DependentUpon>ToDown.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToTop2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToTop2.Designer.cs">
+      <DependentUpon>ToTop2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToTop.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToTop.Designer.cs">
+      <DependentUpon>ToTop.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToLeft2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToLeft2.Designer.cs">
+      <DependentUpon>ToLeft2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToLeft.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToLeft.Designer.cs">
+      <DependentUpon>ToLeft.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToRight2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToRight2.Designer.cs">
+      <DependentUpon>ToRight2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToRight.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToRight.Designer.cs">
+      <DependentUpon>ToRight.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Arrow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Arrow.Designer.cs">
+      <DependentUpon>Arrow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BlackArrow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BlackArrow.Designer.cs">
+      <DependentUpon>BlackArrow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Global.cs" />
+    <Compile Include="ImageMatcher.cs" />
+    <Compile Include="MainWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainWindow.Designer.cs">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MovementDecision.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ROIWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ROIWindow.Designer.cs">
+      <DependentUpon>ROIWindow.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="ToDown2.resx">
+      <DependentUpon>ToDown2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToDown.resx">
+      <DependentUpon>ToDown.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToTop2.resx">
+      <DependentUpon>ToTop2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToTop.resx">
+      <DependentUpon>ToTop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToLeft2.resx">
+      <DependentUpon>ToLeft2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToLeft.resx">
+      <DependentUpon>ToLeft.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToRight2.resx">
+      <DependentUpon>ToRight2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToRight.resx">
+      <DependentUpon>ToRight.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Arrow.resx">
+      <DependentUpon>Arrow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BlackArrow.resx">
+      <DependentUpon>BlackArrow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainWindow.resx">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ROIWindow.resx">
+      <DependentUpon>ROIWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="OpenTK.dll.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Res\check.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Res\cross.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Res\exit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\start.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\to_right.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\to_right2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\to_left.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\to_left2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tp_top2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\to_top2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\to_down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\to_down2.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\EMGU.CV.4.1.1.3497\build\EMGU.CV.targets" Condition="Exists('..\packages\EMGU.CV.4.1.1.3497\build\EMGU.CV.targets')" />
+  <Import Project="..\packages\EmguCV.3.1.0.1\build\EmguCV.targets" Condition="Exists('..\packages\EmguCV.3.1.0.1\build\EmguCV.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EmguCV.3.1.0.1\build\EmguCV.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EmguCV.3.1.0.1\build\EmguCV.targets'))" />
+  </Target>
+</Project>
